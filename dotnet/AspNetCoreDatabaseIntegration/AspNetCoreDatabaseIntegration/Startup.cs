@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Sentry.AspNetCore;
+using System.Collections.Generic;
+using System.IO;
 
 namespace AspNetCoreDatabaseIntegration
 {
@@ -23,17 +25,24 @@ namespace AspNetCoreDatabaseIntegration
             services.AddTransient<IDapperBugRepository, DapperBugRepository>();
             services.AddTransient<IEFBugRepository, EFBugRepository>();
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<BugEfDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<BugEfDbContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Transient);
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
+                c.EnableAnnotations();
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Version = "v1",
+                Version = "v1",
                     Title = "Sentry - database sample",
+                    Description = @"This API will demonstrate the use-cases of the new Sentry integration with SQL Client and Entity Framework Core.
+Return outputs will be limited to 500 items to avoid slowdowns when showing the serialized data on the web."
                 });
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "AspNetCoreDatabaseIntegration.xml");
+                c.IncludeXmlComments(filePath);
+                c.DocInclusionPredicate((_, api) => !string.IsNullOrWhiteSpace(api.GroupName));                
+                c.TagActionsBy(api => new List<string>() { api.GroupName });
             });
         }
 
@@ -53,7 +62,8 @@ namespace AspNetCoreDatabaseIntegration
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CleanArchitecture.WebApi");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SentrySample.WebApi");
+                c.RoutePrefix = "";
             });
 
             app.UseEndpoints(endpoints =>

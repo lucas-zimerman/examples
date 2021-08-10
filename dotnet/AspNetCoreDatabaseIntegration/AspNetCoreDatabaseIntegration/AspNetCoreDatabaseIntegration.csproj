@@ -4,6 +4,14 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\lucas\source\repos\SentrySdk\SentryExamples\dotnet\AspNetCoreDatabaseIntegration\AspNetCoreDatabaseIntegration\AspNetCoreDatabaseIntegration.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
@@ -19,6 +27,7 @@
     <PackageReference Include="Sentry.AspNetCore" Version="3.8.3" />
     <PackageReference Include="ServiceStack.OrmLite.Sqlite" Version="5.11.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.1.5" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.1.5" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>

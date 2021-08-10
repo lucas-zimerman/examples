@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AspNetCoreDatabaseIntegration</name>
+    </assembly>
+    <members>
+        <member name="M:AspNetCoreDatabaseIntegration.Controllers.DapperController.GetTotal">
+            <summary>
+            Get the amount of stored items on the database.
+            </summary>
+            <returns>The database count.</returns>
+        </member>
+        <member name="M:AspNetCoreDatabaseIntegration.Controllers.DapperController.GetAll">
+            <summary>
+            Get all items from the database using EF Syntax.
+            </summary>
+            <returns>The total items capped by 500.</returns>
+        </member>
+        <member name="M:AspNetCoreDatabaseIntegration.Controllers.DapperController.GetAllParallel">
+            <summary>
+            Get all items from the database assyncronously.
+            </summary>
+            <returns>The total items capped by 500.</returns>
+        </member>
+        <member name="M:AspNetCoreDatabaseIntegration.Controllers.DapperController.GetAllParallelError">
+            <summary>
+            Get all items from the database assyncronously with an query with error.
+            </summary>
+            <returns>An exception.</returns>
+        </member>
+        <member name="M:AspNetCoreDatabaseIntegration.Controllers.EFController.GetTotal">
+            <summary>
+            Get the amount of stored items on the database.
+            </summary>
+            <returns>The database count.</returns>
+        </member>
+        <member name="M:AspNetCoreDatabaseIntegration.Controllers.EFController.GetAll">
+            <summary>
+            Get all items from the database using EF Syntax.
+            </summary>
+            <returns>The total items capped by 500.</returns>
+        </member>
+        <member name="M:AspNetCoreDatabaseIntegration.Controllers.EFController.GetAllRawSQL">
+            <summary>
+            Get all items from the database using Raw SQL with EF.
+            </summary>
+            <returns>The total items capped by 500.</returns>
+        </member>
+        <member name="M:AspNetCoreDatabaseIntegration.Controllers.EFController.GetAllParallel">
+            <summary>
+            Get all items from the database assyncronously.
+            </summary>
+            <returns>The total items capped by 500.</returns>
+        </member>
+        <member name="M:AspNetCoreDatabaseIntegration.Controllers.EFController.GetAllParallelError">
+            <summary>
+            Get all items from the database assyncronously with an query with error.
+            </summary>
+            <returns>An exception.</returns>
+        </member>
+    </members>
+</doc>

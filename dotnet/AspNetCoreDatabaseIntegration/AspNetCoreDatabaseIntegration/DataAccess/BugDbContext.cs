@@ -13,6 +13,9 @@ namespace AspNetCoreDatabaseIntegration.DataAccess
         }
 
         public DbSet<Bug> Error { get; set; }
+        public DbSet<Bug> Error2 { get; set; }
+        public DbSet<Bug> Error3 { get; set; }
+        public DbSet<Bug> Error4 { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

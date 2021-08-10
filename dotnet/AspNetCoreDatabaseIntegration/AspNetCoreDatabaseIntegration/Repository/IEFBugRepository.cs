@@ -8,7 +8,7 @@ namespace AspNetCoreDatabaseIntegration.Repository
     {
         IList<Bug> GetAll();
         IList<Bug> GetAllRawSQL();
-        Task<IList<Bug>> GetAllParallel(int ammount);
+        Task<IList<Bug>> GetAllParallel(int ammount, int take, int db);
         int GetTotal();
     }
 }

@@ -1,8 +1,5 @@
 ﻿using AspNetCoreDatabaseIntegration.Model;
-using Microsoft.Extensions.Configuration;
-using Dapper;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreDatabaseIntegration.DataAccess;
@@ -27,23 +24,27 @@ namespace AspNetCoreDatabaseIntegration.Repository
             return context.Error.FromSqlRaw("SELECT * FROM Bug").ToList();
         }
 
-        public async Task<IList<Bug>> GetAllParallel(int ammount)
+        public async Task<IList<Bug>> GetAllParallel(int ammount, int take, int db)
+        ///            => await context.Error.Select(s => s).Where((bug) => bug.Id > ammount).Take(take).ToListAsync(); 
         {
-            var sql1 = $"SELECT TOP {ammount / 4} * FROM Bug";
-            var sql2 = $"SELECT TOP {ammount / 4} * FROM Bug WHERE Id > {ammount / 4}";
-            var sql3 = $"SELECT TOP {ammount / 4} * FROM Bug WHERE Id > {ammount - ammount / 4}";
-            var sql4 = $"SELECT TOP {ammount / 4} * FROM Bug WHERE Id > {ammount / 2}";
-            var results = new Task<List<Bug>>[]
+            if (db == 0)
             {
-                context.Error.Select(s => s).Take(ammount / 4).ToListAsync(),
-                context.Error.Select(s => s).Where((bug) => bug.Id > ammount / 4).Take(ammount / 4).ToListAsync(),
-                context.Error.Select(s => s).Where((bug) => bug.Id > ammount - ammount / 4).Take(ammount / 4).ToListAsync(),
-                context.Error.Select(s => s).Where((bug) => bug.Id > ammount / 2).Take(ammount / 4).ToListAsync()
-            };
-            await Task.WhenAll(results);
-            return results.SelectMany(p => p.Result).ToList();
+                return  await context.Error.FromSqlRaw($"SELECT TOP {take} * FROM Bug WHERE ID > {ammount}").ToListAsync();
             }
-
+            else if (db == 1)
+            {
+                return await context.Error2.FromSqlRaw($"SELECT TOP {take} * FROM Bug WHERE ID > {ammount}").ToListAsync();
+            }
+            else if (db == 2)
+            {
+                return await context.Error3.FromSqlRaw($"SELECT TOP {take} * FROM Bug WHERE ID > {ammount}").ToListAsync();
+            }
+            else if (db == 3)
+            {
+                return await context.Error4.FromSqlRaw($"SELECT TOP {take} * FROM Bug WHERE ID > {ammount}").ToListAsync();
+            }
+            return null;
+        }
         public int GetTotal()
         {
                 return context.Error.Count();

@@ -2,10 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections.Generic;
+using AspNetCoreDatabaseIntegration.Model;
+using AspNetCoreDatabaseIntegration.OutputExamples;
 
 namespace AspNetCoreDatabaseIntegration.Controllers
 {
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = "SQLClient with Dapper")]
     [ApiController]
     public class DapperController : ControllerBase
     {
@@ -16,7 +20,12 @@ namespace AspNetCoreDatabaseIntegration.Controllers
             this.unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Get the amount of stored items on the database.
+        /// </summary>
+        /// <returns>The database count.</returns>
         [HttpGet("Total")]
+        [ProducesResponseType(typeof(int), 200)]
         public async Task<IActionResult> GetTotal()
         {
             var data = await unitOfWork.BugsRepository.GetTotal();
@@ -24,7 +33,12 @@ namespace AspNetCoreDatabaseIntegration.Controllers
             return Ok(data);
         }
 
-        [HttpGet("GetAll")]
+        /// <summary>
+        /// Get all items from the database using EF Syntax.
+        /// </summary>
+        /// <returns>The total items capped by 500.</returns>
+        [HttpGet("All")]
+        [ProducesResponseType(typeof(List<Bug>), 200)]
         public async Task<IActionResult> GetAll()
         {
             var data = await unitOfWork.BugsRepository.GetAll();
@@ -32,7 +46,12 @@ namespace AspNetCoreDatabaseIntegration.Controllers
             return Ok(data.Take(500));
         }
 
-        [HttpGet("GetAllParallel")]
+        /// <summary>
+        /// Get all items from the database assyncronously.
+        /// </summary>
+        /// <returns>The total items capped by 500.</returns>
+        [HttpGet("All/Parallel")]
+        [ProducesResponseType(typeof(List<Bug>), 200)]
         public async Task<IActionResult> GetAllParallel()
         {
             var data = await unitOfWork.BugsRepository.GetAllParallel(1000);
@@ -40,7 +59,12 @@ namespace AspNetCoreDatabaseIntegration.Controllers
             return Ok(data.Take(500));
         }
 
-        [HttpGet("GetAllParallel/Error")]
+        /// <summary>
+        /// Get all items from the database assyncronously with an query with error.
+        /// </summary>
+        /// <returns>An exception.</returns>
+        [HttpGet("All/Parallel/Error")]
+        [ProducesResponseType(typeof(ExceptionExample), 500)]
         public async Task<IActionResult> GetAllParallelError()
         {
             // This will generate a query with SELECT TOP -250.
