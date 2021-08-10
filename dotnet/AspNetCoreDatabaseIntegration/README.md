@@ -6,7 +6,7 @@ Tested on:
 * Windows 10 Build 19042 with LocalDB
 * MacOS Big Sur with SQL Server.
 
-We recommend testing it with the Docker version of SQL Server for in case the default setup doesn't work.
+We recommend testing it with the Docker version of SQL Server in case the default setup doesn't work.
 
 ## Docker SETUP
 
@@ -25,9 +25,9 @@ You'll also need to edit your DefaultConnection on [appsettings.json](AspNetCore
 You may also change the source ip according to the database location.
 
 ## Running the Demo
-1. Configure your DSN in [appsettings.json](appsettings.json)
+1. Configure your DSN in [appsettings.json](AspNetCoreDatabaseIntegration/appsettings.json)
 3. Run.
-4. Execute the different endpoints presented on swagger that integrates EF Core and SQLClient, each endpoint will generate a new Transaction that will be shown at your ORG performance monitoring.
+4. Execute the different endpoints presented on swagger that integrates EF Core and SQLClient with Dapper, each endpoint will generate a new Transaction that will be shown at your ORG performance monitoring.
 
 
 ### In this sample we demonstrate the following:
