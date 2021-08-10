@@ -3,16 +3,14 @@ using AspNetCoreDatabaseIntegration.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AspNetCoreDatabaseIntegration.Migrations
 {
-    [DbContext(typeof(BugEfDbContext))]
-    [Migration("20210803200851_InitialCreate")]
-    partial class InitialCreate
+    [DbContext(typeof(ExceptionTypeDbContext))]
+    partial class ExceptionTypeDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,7 +18,7 @@ namespace AspNetCoreDatabaseIntegration.Migrations
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("AspNetCoreDatabaseIntegration.Model.Bug", b =>
+            modelBuilder.Entity("AspNetCoreDatabaseIntegration.Model.ExceptionType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,7 +33,7 @@ namespace AspNetCoreDatabaseIntegration.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Bug");
+                    b.ToTable("ExceptionType");
                 });
 #pragma warning restore 612, 618
         }

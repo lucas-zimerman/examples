@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreDatabaseIntegration.Repository
 {
-    public interface IDapperBugRepository
+    public interface IDapperExceptionTypeRepository
     {
-        Task<IList<Bug>> GetAll();
-        Task<IList<Bug>> GetAllParallel(int ammount);
+        Task<IList<ExceptionType>> GetAll();
+        Task<IList<ExceptionType>> GetAllParallel(int ammount);
         Task<int> GetTotal();
     }
 }

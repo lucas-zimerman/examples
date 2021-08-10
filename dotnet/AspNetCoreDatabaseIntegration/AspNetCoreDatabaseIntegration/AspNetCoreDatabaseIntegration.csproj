@@ -35,4 +35,8 @@
     <ProjectReference Include="D:\Programacao\Online Projects\Sentry\sentry-dotnet\src\Sentry.AspNetCore\Sentry.AspNetCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

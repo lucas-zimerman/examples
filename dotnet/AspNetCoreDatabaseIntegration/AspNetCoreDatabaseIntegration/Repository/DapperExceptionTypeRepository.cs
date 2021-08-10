@@ -8,26 +8,26 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreDatabaseIntegration.Repository
 {
-    public class DapperBugRepository : IDapperBugRepository
+    public class DapperExceptionTypeRepository : IDapperExceptionTypeRepository
     {
         private readonly IConfiguration configuration;
-        public DapperBugRepository(IConfiguration configuration)
+        public DapperExceptionTypeRepository(IConfiguration configuration)
         {
             this.configuration = configuration;
         }
 
-        public async Task<IList<Bug>> GetAll()
+        public async Task<IList<ExceptionType>> GetAll()
         {
             var sql = "SELECT * FROM Bug";
             using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<Bug>(sql);
+                var result = await connection.QueryAsync<ExceptionType>(sql);
                 return result.ToList();
             }
         }
 
-        public async Task<IList<Bug>> GetAllParallel(int ammount)
+        public async Task<IList<ExceptionType>> GetAllParallel(int ammount)
         {
             var sql1 = $"SELECT TOP {ammount / 4} * FROM Bug";
             var sql2 = $"SELECT TOP {ammount / 4} * FROM Bug WHERE Id > {ammount / 4}";
@@ -36,12 +36,12 @@ namespace AspNetCoreDatabaseIntegration.Repository
             using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
-                var results = new Task<IEnumerable<Bug>>[]
+                var results = new Task<IEnumerable<ExceptionType>>[]
                 {
-                    connection.QueryAsync<Bug>(sql1),
-                    connection.QueryAsync<Bug>(sql2),
-                    connection.QueryAsync<Bug>(sql3),
-                    connection.QueryAsync<Bug>(sql4)
+                    connection.QueryAsync<ExceptionType>(sql1),
+                    connection.QueryAsync<ExceptionType>(sql2),
+                    connection.QueryAsync<ExceptionType>(sql3),
+                    connection.QueryAsync<ExceptionType>(sql4)
                 };
                 await Task.WhenAll(results);
                 return results.SelectMany(p => p.Result).ToList();

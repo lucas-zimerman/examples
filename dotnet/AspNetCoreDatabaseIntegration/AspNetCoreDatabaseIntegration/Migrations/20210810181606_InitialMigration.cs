@@ -2,12 +2,12 @@
 
 namespace AspNetCoreDatabaseIntegration.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Bug",
+                name: "ExceptionType",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -17,14 +17,14 @@ namespace AspNetCoreDatabaseIntegration.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bug", x => x.Id);
+                    table.PrimaryKey("PK_ExceptionType", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Bug");
+                name: "ExceptionType");
         }
     }
 }

@@ -1,41 +1,49 @@
 ﻿using AspNetCoreDatabaseIntegration.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Data.SqlClient;
+using System.Linq;
 
 namespace AspNetCoreDatabaseIntegration.DataAccess
 {
-    public class BugEfDbContext : DbContext
+    public class ExceptionTypeDbContext : DbContext
     {
-        public BugEfDbContext(DbContextOptions<BugEfDbContext> options)
+        public ExceptionTypeDbContext(DbContextOptions<ExceptionTypeDbContext> options)
     : base(options)
         { 
         }
 
-        public DbSet<Bug> Error { get; set; }
-        public DbSet<Bug> Error2 { get; set; }
-        public DbSet<Bug> Error3 { get; set; }
-        public DbSet<Bug> Error4 { get; set; }
+        public DbSet<ExceptionType> ExceptionTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Bug>( entity =>
+            modelBuilder.Entity<ExceptionType>( entity =>
             {
                 entity.HasKey(k => k.Id);
             });
         }
 
-        public static void Seed(BugEfDbContext db)
+        public static void Seed(ExceptionTypeDbContext db)
         {
             //Clear the previous data
-            db.Database.ExecuteSqlRaw("TRUNCATE TABLE Bug");
+            db.Database.ExecuteSqlRaw("TRUNCATE TABLE ExceptionType");
+
+            //Get list of exceptions types.
+            var type = typeof(Exception);
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(p => type.IsAssignableFrom(p))
+                .ToList();
+
+            var rand = new Random();
             for (int i = 0; i < 50_000; i++)
             {
-                db.Set<Bug>().Add(new Bug()
+                db.Set<ExceptionType>().Add(new ExceptionType()
                 {
-                    Name = DateTime.Now.Ticks.ToString()
+                    Name = types[rand.Next(0, types.Count())].FullName,
+                    Level = DateTime.Now.Ticks.ToString()
+
                 });
             }
             db.SaveChanges();

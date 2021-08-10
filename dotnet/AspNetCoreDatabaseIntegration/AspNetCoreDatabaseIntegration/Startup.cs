@@ -22,10 +22,10 @@ namespace AspNetCoreDatabaseIntegration
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IDapperBugRepository, DapperBugRepository>();
-            services.AddTransient<IEFBugRepository, EFBugRepository>();
+            services.AddTransient<IDapperExceptionTypeRepository, DapperExceptionTypeRepository>();
+            services.AddTransient<IEFExceptionTypeRepository, EFExceptionTypeRepository>();
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<BugEfDbContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Transient);
+            services.AddDbContext<ExceptionTypeDbContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Transient);
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddControllers();
@@ -73,9 +73,10 @@ Return outputs will be limited to 500 items to avoid slowdowns when showing the 
 
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
-                var context = serviceScope.ServiceProvider.GetRequiredService<BugEfDbContext>();
+                var context = serviceScope.ServiceProvider.GetRequiredService<ExceptionTypeDbContext>();
+                // If LocalDB is not supported, we recommend trying the Docker setup of SQL Server. More information can be found at Readme.md
                 context.Database.Migrate();
-                BugEfDbContext.Seed(context);
+                ExceptionTypeDbContext.Seed(context);
 
             }
         }

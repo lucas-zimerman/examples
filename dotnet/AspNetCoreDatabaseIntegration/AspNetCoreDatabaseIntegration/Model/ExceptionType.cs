@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AspNetCoreDatabaseIntegration.Model
 {
-    [Table("Bug")]
-    public class Bug
+    [Table("ExceptionType")]
+    public class ExceptionType
     {
         [Key]
         public int Id { get; set; }

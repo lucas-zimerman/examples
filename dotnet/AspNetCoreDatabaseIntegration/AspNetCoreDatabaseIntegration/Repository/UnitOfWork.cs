@@ -2,13 +2,13 @@
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public UnitOfWork(IDapperBugRepository bugRepository, IEFBugRepository efBugRepository)
+        public UnitOfWork(IDapperExceptionTypeRepository dapperExceptionTypeRepository, IEFExceptionTypeRepository efExceptionTypeRepository)
         {
-            BugsRepository = bugRepository;
-            EFBugRepository = efBugRepository;
+            DapperExceptionTypeRepository = dapperExceptionTypeRepository;
+            EFExceptionTypeRepository = efExceptionTypeRepository;
         }
-        public IDapperBugRepository BugsRepository { get; }
+        public IDapperExceptionTypeRepository DapperExceptionTypeRepository { get; }
 
-        public IEFBugRepository EFBugRepository { get; }
+        public IEFExceptionTypeRepository EFExceptionTypeRepository { get; }
     }
 }

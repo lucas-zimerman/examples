@@ -28,8 +28,7 @@ namespace AspNetCoreDatabaseIntegration.Controllers
         [ProducesResponseType(typeof(int), 200)]
         public async Task<IActionResult> GetTotal()
         {
-            var data = await unitOfWork.BugsRepository.GetTotal();
-            if (data == null) return Ok();
+            var data = await unitOfWork.DapperExceptionTypeRepository.GetTotal();
             return Ok(data);
         }
 
@@ -38,11 +37,14 @@ namespace AspNetCoreDatabaseIntegration.Controllers
         /// </summary>
         /// <returns>The total items capped by 500.</returns>
         [HttpGet("All")]
-        [ProducesResponseType(typeof(List<Bug>), 200)]
+        [ProducesResponseType(typeof(List<ExceptionType>), 200)]
         public async Task<IActionResult> GetAll()
         {
-            var data = await unitOfWork.BugsRepository.GetAll();
-            if (data == null) return Ok();
+            var data = await unitOfWork.DapperExceptionTypeRepository.GetAll();
+            if (data == null)
+            {
+                return Ok();
+            }
             return Ok(data.Take(500));
         }
 
@@ -51,11 +53,14 @@ namespace AspNetCoreDatabaseIntegration.Controllers
         /// </summary>
         /// <returns>The total items capped by 500.</returns>
         [HttpGet("All/Parallel")]
-        [ProducesResponseType(typeof(List<Bug>), 200)]
+        [ProducesResponseType(typeof(List<ExceptionType>), 200)]
         public async Task<IActionResult> GetAllParallel()
         {
-            var data = await unitOfWork.BugsRepository.GetAllParallel(1000);
-            if (data == null) return Ok();
+            var data = await unitOfWork.DapperExceptionTypeRepository.GetAllParallel(1000);
+            if (data == null)
+            {
+                return Ok();
+            }
             return Ok(data.Take(500));
         }
 
@@ -69,8 +74,11 @@ namespace AspNetCoreDatabaseIntegration.Controllers
         {
             // This will generate a query with SELECT TOP -250.
             // and that is not allowed, generating an error.
-            var data = await unitOfWork.BugsRepository.GetAllParallel(-500);
-            if (data == null) return Ok();
+            var data = await unitOfWork.DapperExceptionTypeRepository.GetAllParallel(-500);
+            if (data == null)
+            {
+                return Ok();
+            }
             return Ok(data);
         }
     }

@@ -7,7 +7,7 @@ namespace AspNetCoreDatabaseIntegration.Repository
 {
     public interface IUnitOfWork
     {
-        public IDapperBugRepository BugsRepository { get; }
-        public IEFBugRepository EFBugRepository { get; }
+        public IDapperExceptionTypeRepository DapperExceptionTypeRepository { get; }
+        public IEFExceptionTypeRepository EFExceptionTypeRepository { get; }
     }
 }

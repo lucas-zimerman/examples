@@ -46,13 +46,7 @@
             </summary>
             <returns>The total items capped by 500.</returns>
         </member>
-        <member name="M:AspNetCoreDatabaseIntegration.Controllers.EFController.GetAllParallel">
-            <summary>
-            Get all items from the database assyncronously.
-            </summary>
-            <returns>The total items capped by 500.</returns>
-        </member>
-        <member name="M:AspNetCoreDatabaseIntegration.Controllers.EFController.GetAllParallelError">
+        <member name="M:AspNetCoreDatabaseIntegration.Controllers.EFController.GetAllError">
             <summary>
             Get all items from the database assyncronously with an query with error.
             </summary>
