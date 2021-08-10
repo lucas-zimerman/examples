@@ -71,3 +71,4 @@ android/app/release/
 
 bin/
 obj/
+/.vs
