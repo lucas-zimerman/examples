@@ -1,5 +1,5 @@
 =======
-To run this sample, edit [appsettings.json](appsettings.json) and **set your DSN** to see the events in Sentry.
+To run this sample, edit [appsettings.json](AspNetCoreDatabaseIntegration/appsettings.json) and **set your DSN** to see the events in Sentry.
 You may also need to edit your Data Source Ip and port, user id and password if using a database different than localdb.
 
 Tested on:
@@ -17,7 +17,7 @@ docker run -e "ACCEPT_EULA=1" -e "MSSQL_SA_PASSWORD=MyPass@word" -e "MSSQL_PID=D
 more information at: https://medium.com/geekculture/docker-express-running-a-local-sql-server-on-your-m1-mac-8bbc22c49dc9
 
 
-You'll also need to edit your DefaultConnection on [appsettings.json](appsettings.json) to change the database address and credentials.
+You'll also need to edit your DefaultConnection on [appsettings.json](AspNetCoreDatabaseIntegration/appsettings.json) to change the database address and credentials.
 
 ```xml
 "DefaultConnection": "Data Source=127.0.0.1;User Id=sa;Password=MyPass@word;Database=SampleAspNetWithEfCore;Trusted_Connection=False;ConnectRetryCount=0;MultipleActiveResultSets=True"
