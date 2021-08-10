@@ -29,19 +29,19 @@ namespace AspNetCoreDatabaseIntegration.Repository
         {
             if (db == 0)
             {
-                return  await context.Error.FromSqlRaw($"SELECT TOP {take} * FROM Bug WHERE ID > {ammount}").ToListAsync();
+                return context.Error.FromSqlRaw($"SELECT TOP {take} * FROM Bug WHERE ID > {ammount}").AsNoTracking().ToList();
             }
             else if (db == 1)
             {
-                return await context.Error2.FromSqlRaw($"SELECT TOP {take} * FROM Bug WHERE ID > {ammount}").ToListAsync();
+                return context.Error2.FromSqlRaw($"SELECT TOP {take} * FROM Bug WHERE ID > {ammount}").AsNoTracking().ToList();
             }
             else if (db == 2)
             {
-                return await context.Error3.FromSqlRaw($"SELECT TOP {take} * FROM Bug WHERE ID > {ammount}").ToListAsync();
+                return context.Error3.FromSqlRaw($"SELECT TOP {take} * FROM Bug WHERE ID > {ammount}").AsNoTracking().ToList();
             }
             else if (db == 3)
             {
-                return await context.Error4.FromSqlRaw($"SELECT TOP {take} * FROM Bug WHERE ID > {ammount}").ToListAsync();
+                return context.Error4.FromSqlRaw($"SELECT TOP {take} * FROM Bug WHERE ID > {ammount}").AsNoTracking().ToList();
             }
             return null;
         }

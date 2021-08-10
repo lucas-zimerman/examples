@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sentry.AspNetCore", "D:\Programacao\Online Projects\Sentry\sentry-dotnet\src\Sentry.AspNetCore\Sentry.AspNetCore.csproj", "{9AA9BBE1-8D39-47A1-A818-BF4F0FD0239F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{6C051985-E5AD-4039-9488-9C7A022029EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C051985-E5AD-4039-9488-9C7A022029EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C051985-E5AD-4039-9488-9C7A022029EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AA9BBE1-8D39-47A1-A818-BF4F0FD0239F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AA9BBE1-8D39-47A1-A818-BF4F0FD0239F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AA9BBE1-8D39-47A1-A818-BF4F0FD0239F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AA9BBE1-8D39-47A1-A818-BF4F0FD0239F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
